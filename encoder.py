@@ -10,7 +10,7 @@ class CatEncoder(BaseEstimator, TransformerMixin):
         self.cat_cols = None
 
     def fit(self, X):
-        self.cat_cols = X.select_dtype(object).columns
+        self.cat_cols = X.select_dtypes(object).columns
         for cat_col in self.cat_cols:
             counts = pd.value_counts(X[cat_col])
             self.categories[cat_col] = counts[counts >= self.min_count].index.tolist()
